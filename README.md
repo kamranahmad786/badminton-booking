@@ -94,7 +94,7 @@ VITE_API_URL=https://badminton-backend.onrender.com/api
 
 Vercel gives a live domain:
 
-https://badminton-booking.vercel.app
+https://badminton-bookings.vercel.app
 
 
 ---
@@ -104,7 +104,7 @@ https://badminton-booking.vercel.app
 Backend allows:
 
 ```env
-CLIENT_URL=https://badminton-booking.vercel.app
+CLIENT_URL=https://badminton-bookings.vercel.app
 
 🧪 Test Deployment
 
@@ -120,7 +120,7 @@ POST https://badminton-backend.onrender.com/api/bookings
 
 Frontend:
 
-https://badminton-booking.vercel.app
+https://badminton-bookings.vercel.app
 
 🛠️ Production Tips
 
@@ -215,7 +215,7 @@ https://badminton-backend.onrender.com/api
 
 Frontend UI:
 
-https://badminton-booking.vercel.app
+https://badminton-bookings.vercel.app
 
 
 📄 License

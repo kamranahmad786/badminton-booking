@@ -130,7 +130,7 @@ https://badminton-booking.vercel.app
 ✔ Monitor logs on Render for errors
 
 
-
+📁 Folder Structure
  
 badminton-booking/
 │
@@ -181,3 +181,44 @@ badminton-booking/
 │   └── .env
 │
 └── README.md
+
+
+⚠️ IMPORTANT CHECKLIST BEFORE DEPLOY
+
+In backend .env:
+
+🚫 Do NOT use localhost
+
+❌ MONGO_URI=mongodb://localhost:27017/badminton-booking
+
+✔ Use Atlas:
+
+MONGO_URI=mongodb+srv://<user>:<pwd>@cluster.mongodb.net/badminton
+
+🎯 Live Workflow
+Backend:
+
+✔ Render deploys → restart after env change
+✔ Logs available in dashboard
+
+Frontend:
+
+✔ Vercel deploys automatically per push
+
+🙌 Final Result
+
+You will have 2 live URLs:
+
+Backend API:
+
+https://badminton-backend.onrender.com/api
+
+Frontend UI:
+
+https://badminton-booking.vercel.app
+
+
+📄 License
+
+MIT — free to use & modify
+

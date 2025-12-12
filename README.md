@@ -217,6 +217,19 @@ Frontend UI:
 
 https://badminton-bookings.vercel.app
 
+## 300–500 Word Write-Up (DB Design + Pricing Engine)
+
+Data Modelling
+
+I modelled the problem around explicit resources: Court, Equipment, Coach, and Booking. Courts store type (indoor/outdoor) and active status so the admin can disable individual courts. Equipment is a simple inventory model with a totalQuantity field that is checked against existing bookings for overlapping time ranges to prevent over-allocation. Coaches have an embedded availability array describing recurring weekly time windows; this keeps the schema simple while still allowing the frontend to highlight coach options for a given day.
+
+Bookings act as the central join between all resources: they reference one court, an optional coach, and an array of equipment items with quantities. Time is stored as date (day) plus startTime and endTime strings, which keeps queries and indexes compact and avoids timezone noise for a single-facility system. A compound unique index on (court, date, startTime, endTime, status) prevents double bookings at the database level and, combined with transactions, ensures atomicity. A separate WaitlistEntry collection models the bonus requirement for waitlisting; entries mirror the booking’s time window and allow FIFO processing on cancellation.
+
+Pricing Engine
+
+Pricing is intentionally configuration-driven via the PricingRule collection. Each rule has a type, conditions, and an amountType (FLAT or PERCENT). The engine does not hardcode business constants; instead, it loads enabled rules from the database and evaluates them against a context object containing the court, coach, equipment selection, date, and time. The context derives flags like isWeekend and isPeakHour, and the rules’ condition fields (e.g. indoorOnly, isWeekend) determine which rules apply.
+
+The calculation runs in three phases: determine the base court hourly rate (BASE_RATE rules), compute time-based surcharges (peak hours, weekends, indoor premium), then add resource-based fees (equipment and coach). Rules stack naturally because each contributes its own numeric delta to a breakdown object that is returned alongside the final totalPrice. This breakdown is used on the frontend to show a live, transparent price explanation as users toggle options. Since rules are data-driven, the admin can change peak hour percentages or weekend surcharges without touching code, and new rule types can be introduced by extending the rule enum and handler logic in one place.
 
 📄 License
 

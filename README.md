@@ -217,7 +217,7 @@ Frontend UI:
 
 https://badminton-bookings.vercel.app
 
-## 300–500 Word Write-Up (DB Design + Pricing Engine)
+##DB Design + Pricing Engine
 
 Data Modelling
 
